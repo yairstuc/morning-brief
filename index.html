@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Morning Brief - Sunday, September 06, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#1a1a18;--ink-muted:#6b6b64;--ink-faint:#a8a89e;--paper:#faf8f3;--paper-warm:#f2efe6;--border:#ccc9be;--green:#1D9E75;--green-bg:#E1F5EE;--serif:'Playfair Display',Georgia,serif;--body:'Source Serif 4',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.7}
+.paper-header{border-top:5px solid var(--ink);border-bottom:1px solid var(--ink);padding:10px 24px 12px;text-align:center}
+.paper-meta{display:flex;justify-content:space-between;font-family:var(--sans);font-size:10px;font-weight:300;color:var(--ink-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.paper-title{font-family:var(--serif);font-size:clamp(32px,6vw,52px);font-weight:900;letter-spacing:-.02em;line-height:1;margin:4px 0}
+.paper-tagline{font-family:var(--sans);font-size:10px;font-weight:300;letter-spacing:.18em;color:var(--ink-muted);text-transform:uppercase;margin-top:5px}
+.prog-wrap{background:var(--paper-warm);border-bottom:.5px solid var(--border);padding:7px 24px;display:flex;align-items:center;gap:12px;font-family:var(--sans);font-size:11px;color:var(--ink-muted)}
+.prog-bar{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:var(--ink);border-radius:2px;width:0%;transition:width .4s ease}
+.sec-nav{display:flex;border-top:1px solid var(--ink);border-bottom:3px double var(--border);padding:0 24px;overflow-x:auto}
+.nav-btn{font-family:var(--sans);font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;cursor:pointer;color:var(--ink-muted);border:none;background:none;border-right:.5px solid var(--border);transition:all .15s;white-space:nowrap}
+.nav-btn:hover{background:var(--paper-warm)}
+.nav-btn.active{background:var(--ink);color:var(--paper)}
+.nav-time{font-family:var(--sans);font-size:10px;color:var(--ink-muted);padding:6px 14px;margin-left:auto}
+.columns{display:grid;grid-template-columns:1fr 1.65fr 1fr;max-width:1200px;margin:0 auto;padding:0 16px}
+@media(max-width:780px){.columns{grid-template-columns:1fr}.col{border-right:none!important;border-bottom:1px solid var(--border)}}
+.col{padding:16px 18px;border-right:.5px solid var(--border)}
+.col:last-child{border-right:none}
+.article{margin-bottom:24px;padding-bottom:20px;border-bottom:.5px solid var(--border);transition:opacity .3s}
+.article:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.article.is-read{opacity:.38}
+.art-source-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.art-source{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted)}
+.source-link-inline{font-family:var(--sans);font-size:9px;color:var(--ink-faint);text-decoration:none;opacity:.7}
+.source-link-inline:hover{opacity:1;text-decoration:underline}
+.art-headline{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1.2;margin-bottom:6px}
+.col:nth-child(2) .art-headline{font-size:26px}
+.art-deck{font-family:var(--sans);font-size:11px;font-weight:300;font-style:italic;color:var(--ink-muted);margin-bottom:10px;line-height:1.5}
+.art-body{font-size:13.5px;line-height:1.7;font-weight:300}
+.art-body p{margin-bottom:8px}
+.drop-cap::first-letter{font-family:var(--serif);font-size:52px;font-weight:900;float:left;line-height:.82;margin:4px 6px 0 0}
+.col:nth-child(2) .drop-cap::first-letter{font-size:68px}
+.pull-quote{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);margin:14px 0;padding:10px 6px;font-family:var(--serif);font-size:14px;font-style:italic;line-height:1.45;text-align:center}
+.vocab-word{border-bottom:1px dotted var(--ink-muted);cursor:help;position:relative}
+.vocab-word::after{content:attr(data-he);position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:3px 9px;border-radius:3px;font-size:11px;font-family:var(--sans);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:100}
+.vocab-word:hover::after{opacity:1}
+.expand-btn{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;background:none;border:.5px solid var(--border);color:var(--ink-muted);padding:5px 11px;cursor:pointer;border-radius:2px;margin-top:10px;transition:all .15s}
+.expand-btn:hover{background:var(--paper-warm)}
+.expanded-content{max-height:0;overflow:hidden;transition:max-height .45s ease,opacity .3s ease;opacity:0;margin-top:0}
+.expanded-content.open{max-height:1200px;opacity:1;margin-top:10px}
+.expanded-inner{padding-top:10px;border-top:.5px dashed var(--border);font-size:13px;line-height:1.72;color:var(--ink-muted)}
+.expanded-inner p{margin-bottom:8px}
+.art-actions{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.mark-btn{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;background:none;border:.5px solid var(--border);color:var(--ink-muted);padding:5px 10px;cursor:pointer;border-radius:2px;transition:all .15s}
+.mark-btn.done{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.int-wrap{display:flex;align-items:center;gap:7px;flex:1;min-width:110px}
+.int-label{font-family:var(--sans);font-size:9px;color:var(--ink-faint);white-space:nowrap;letter-spacing:.08em;text-transform:uppercase}
+input[type=range]{flex:1;height:2px;accent-color:var(--ink);cursor:pointer}
+.int-val{font-family:var(--sans);font-size:10px;font-weight:500;min-width:14px;text-align:right;color:var(--ink-muted)}
+.col-label{font-family:var(--serif);font-size:10px;font-style:italic;text-align:center;color:var(--ink-muted);margin:-8px 0 18px;padding:0 12px;position:relative}
+.col-label::before,.col-label::after{content:'';position:absolute;top:50%;width:24%;height:.5px;background:var(--border)}
+.col-label::before{left:0}.col-label::after{right:0}
+.paper-footer{border-top:3px double var(--border);border-bottom:3px solid var(--ink);padding:8px 24px;display:flex;justify-content:space-between;font-family:var(--sans);font-size:9px;color:var(--ink-muted);letter-spacing:.09em;text-transform:uppercase;margin-top:8px}
+</style>
+</head>
+<body>
+<header class="paper-header">
+  <div class="paper-meta">
+    <span>Geopolitics · Economy · Technology & AI</span>
+    <span>Sunday, September 06, 2026</span>
+    <span>Automated Edition · Gemini AI</span>
+  </div>
+  <div class="paper-title">The Morning Brief</div>
+  <div class="paper-tagline">Your personal newspaper — refreshed every morning at 06:00</div>
+</header>
+<div class="prog-wrap">
+  <span id="read-count">0 / 0 read</span>
+  <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+  <span>~10 min read · Updated 10:22</span>
+</div>
+<nav class="sec-nav">
+  <button class="nav-btn active" onclick="filterCat('all',this)">All</button>
+  <button class="nav-btn" onclick="filterCat('geopolitics',this)">Geopolitics</button>
+  <button class="nav-btn" onclick="filterCat('economy',this)">Economy</button>
+  <button class="nav-btn" onclick="filterCat('technology',this)">Technology / AI</button>
+  <span class="nav-time">10:22 IST</span>
+</nav>
+<div class="columns">
+  <div class="col"><div class="col-label">Geopolitics</div></div>
+  <div class="col"></div>
+  <div class="col"><div class="col-label">In brief</div></div>
+</div>
+<footer class="paper-footer">
+  <span>The Morning Brief 2026</span>
+  <span>Powered by Gemini AI · GitHub Actions · GitHub Pages</span>
+  <span>Auto-generated 10:22 IST</span>
+</footer>
+<script>
+const total=0;
+const readSet=new Set();
+function updateProgress(){var n=readSet.size;document.getElementById('read-count').textContent=n+' / '+total+' read';document.getElementById('prog-fill').style.width=Math.round((n/total)*100)+'%';}
+function markRead(btn,id){var art=document.getElementById(id);if(readSet.has(id)){readSet.delete(id);art.classList.remove('is-read');btn.innerHTML='&#10003; Mark as read';btn.classList.remove('done');}else{readSet.add(id);art.classList.add('is-read');btn.innerHTML='&#10003; Read';btn.classList.add('done');}updateProgress();}
+function toggleExpand(expId,btn){var el=document.getElementById(expId);var isOpen=el.classList.contains('open');el.classList.toggle('open');btn.textContent=isOpen?'+ Deep dive':'- Close';}
+function filterCat(cat,btn){document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.querySelectorAll('.article').forEach(function(a){a.style.display=(cat==='all'||a.dataset.cat===cat)?'':'none';});}
+updateProgress();
+</script>
+</body>
+</html>
